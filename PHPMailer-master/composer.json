@@ -1,5 +1,6 @@
 {
     "name": "phpmailer/phpmailer",
+    "phpmailer/phpmailer": "~5.2",
     "type": "library",
     "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
     "authors": [
