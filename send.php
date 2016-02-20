@@ -1,5 +1,5 @@
 <?php
-require 'PHPMailerAutoload.php';
+require 'PHPMailer-master/PHPMailerAutoload.php';
 if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['email']) && isset($_POST['message'])) {
 	//require("PHPMailer-master/class.phpmailer.php"); //you have to download this plugin from github.com - link is in documentation
 	
