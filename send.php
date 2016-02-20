@@ -1,6 +1,6 @@
 <?php
 if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['email']) && isset($_POST['message'])) {
-	require("PHPMailer-master/PHPMailerAutoload.php"); //you have to download this plugin from github.com - link is in documentation
+	require('PHPMailer-master/PHPMailerAutoload.php'); //you have to download this plugin from github.com - link is in documentation
 	
 	$firstname = 	$_POST['firstname'];
 	$lastname = 	$_POST['lastname'];
@@ -54,7 +54,7 @@ if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['emai
 
 	$mail->Subject = $name." sent you an email from your website";
 	
-	$mail->Body = $message."<br><br>".$name."<br>".$email."<br>";
+	$mail->AltBody = $message."<br><br>".$name."<br>".$email"<br>";
 
 	$mail->send();
 }
