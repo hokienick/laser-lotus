@@ -28,10 +28,11 @@ if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['emai
 	$mail->addAddress("hokienick@gmail.com"); 
 	ChromePhp::log("Added Address and about to send");
 
-	if(!$mail->Send()) {
+	if(!$mail->send()) {
 		ChromePhp::log("Mail error: ", $mail->ErrorInfo);
 		return false;
 	} else {
+		ChromePhp::log("Message seemed to have sent fine");
 		$error = 'Message sent!';
 		return true;
 	}
