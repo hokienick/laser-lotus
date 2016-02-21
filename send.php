@@ -19,7 +19,7 @@ if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['emai
 	$mail->Username = 'laserlotusproductions@gmail.com';  
 	$mail->Password = 'Nachos11!';          
 	$mail->From = $email;
-	$name = $firstname . $lastname;
+	$name = $firstname . " " . $lastname;
 	ChromePhp::log("added name: ",$name);
 	$mail->Subject = $name." sent you an email";
 	ChromePhp::log("added subject");

@@ -1177,8 +1177,10 @@ class PHPMailer
         ChromePhp::log("Enter Send() Function");
         try {
             if (!$this->preSend()) {
+                ChromePhp::log("Presend didnt work");
                 return false;
             }
+            ChromePhp::log("Presend Success, enter postSend");
             return $this->postSend();
         } catch (phpmailerException $exc) {
             $this->mailHeader = '';
