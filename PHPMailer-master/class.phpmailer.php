@@ -1297,6 +1297,7 @@ class PHPMailer
     {
         try {
             // Choose the mailer and send through it
+            ChromePhp::log("Mailer is", $this->Mailer);
             switch ($this->Mailer) {
                 case 'sendmail':
                 case 'qmail':
@@ -1320,6 +1321,7 @@ class PHPMailer
                 throw $exc;
             }
         }
+        ChromePhp::log("returning postsend false");
         return false;
     }
 

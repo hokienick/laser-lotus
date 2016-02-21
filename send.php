@@ -1,7 +1,7 @@
 
 <?php
 if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['email']) && isset($_POST['message'])) {
-	require 'PHPMailer-master/class.phpmailer.php'; //you have to download this plugin from github.com - link is in documentation
+	require 'PHPMailer-master/PHPMailerAutoload.php'; //you have to download this plugin from github.com - link is in documentation
 	include 'ChromePhp.php';
 	
 	$firstname = 	$_POST['firstname'];
@@ -11,11 +11,11 @@ if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['emai
 	
 	$mail = new PHPMailer();  // create a new object
 	$mail->IsSMTP(); // enable SMTP
-	$mail->SMTPDebug = 0;  // debugging: 1 = errors and messages, 2 = messages only
+	$mail->SMTPDebug = 1;  // debugging: 1 = errors and messages, 2 = messages only
 	$mail->SMTPAuth = true;  // authentication enabled
-	$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
+	$mail->SMTPSecure = 'tls'; //Set the encryption system to use - ssl (deprecated) or tls
 	$mail->Host = 'smtp.gmail.com';
-	$mail->Port = 465; 
+	$mail->Port = 587; 
 	$mail->Username = 'laserlotusproductions@gmail.com';  
 	$mail->Password = 'Nachos11!';          
 	$mail->From = $email;
