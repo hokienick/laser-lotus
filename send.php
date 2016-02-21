@@ -1,46 +1,34 @@
 
 <?php
 if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['email']) && isset($_POST['message'])) {
-	require 'PHPMailer-master/PHPMailerAutoload.php'; //you have to download this plugin from github.com - link is in documentation
+	require 'PHPMailer-master/class.phpmailer.php'; //you have to download this plugin from github.com - link is in documentation
 	
 	$firstname = 	$_POST['firstname'];
 	$lastname = 	$_POST['lastname'];
 	$email = 		$_POST['email'];
 	$message = 		$_POST['message'];
 	
-	$mail = new PHPMailer();
-
-	$mail->isSMTP();
-
-	//Enable SMTP debugging
-	// 0 = off (for production use)
-	// 1 = client messages
-	// 2 = client and server messages
-	$mail->SMTPDebug = 2;
-
-	//Ask for HTML-friendly debug output
-	$mail->Debugoutput = 'html';
-
-	//Set the hostname of the mail server
+	$mail = new PHPMailer();  // create a new object
+	$mail->IsSMTP(); // enable SMTP
+	$mail->SMTPDebug = 0;  // debugging: 1 = errors and messages, 2 = messages only
+	$mail->SMTPAuth = true;  // authentication enabled
+	$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
 	$mail->Host = 'smtp.gmail.com';
-	// use
-	// $mail->Host = gethostbyname('smtp.gmail.com');
-	// if your network does not support SMTP over IPv6
-
-	//Set the SMTP port number - 587 for authenticated TLS, a.k.a. RFC4409 SMTP submission
-	$mail->Port = 587;
-
-	//Set the encryption system to use - ssl (deprecated) or tls
-	$mail->SMTPSecure = 'tls';
-
-	//Whether to use SMTP authentication
-	$mail->SMTPAuth = true;
-
-	//Username to use for SMTP authentication - use full email address for gmail
-	$mail->Username = "laserlotusproductions@google.com";
-
-	//Password to use for SMTP authentication
-	$mail->Password = "Nachos11!";
+	$mail->Port = 465; 
+	$mail->Username = 'laserlotusproductions@gmail.com';  
+	$mail->Password = 'Nachos11!';           
+	$mail->From = $email;
+	$name = $firstname . $lastname;
+	$mail->Subject = $name." sent you an email";
+	$mail->Body = $message."<br><br>".$name."<br>".$email."<br>".$phone."<br>";
+	$mail->addAddress("hokienick@gmail.com"); 
+	if(!$mail->Send()) {
+		$error = 'Mail error: '.$mail->ErrorInfo; 
+		return false;
+	} else {
+		$error = 'Message sent!';
+		return true;
+	}
 	
 	$mail->From = $email;
 	$mail->CharSet = "UTF-8";
@@ -48,8 +36,7 @@ if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['emai
 	$mail->addAddress("hokienick@gmail.com"); 
 	
 	$mail->IsHTML(true);
-	$name = $firstname . $lastname;
-	$mail->Subject = $name." sent you an email";
+	
 	
 	$mail->Body = $message."<br><br>".$name."<br>".$email."<br>".$phone."<br>";
 
