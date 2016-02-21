@@ -2,12 +2,14 @@
 <?php
 if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['email']) && isset($_POST['message'])) {
 	require 'PHPMailer-master/class.phpmailer.php'; //you have to download this plugin from github.com - link is in documentation
+	include 'ChromePhp.php'
 	
 	$firstname = 	$_POST['firstname'];
 	$lastname = 	$_POST['lastname'];
 	$email = 		$_POST['email'];
 	$message = 		$_POST['message'];
 	
+	ChromePhp::log('Hello lets start');
 	$mail = new PHPMailer();  // create a new object
 	$mail->IsSMTP(); // enable SMTP
 	$mail->SMTPDebug = 0;  // debugging: 1 = errors and messages, 2 = messages only
@@ -16,7 +18,8 @@ if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['emai
 	$mail->Host = 'smtp.gmail.com';
 	$mail->Port = 465; 
 	$mail->Username = 'laserlotusproductions@gmail.com';  
-	$mail->Password = 'Nachos11!';           
+	$mail->Password = 'Nachos11!';        
+	ChromePhp::log('In the middle now');   
 	$mail->From = $email;
 	$name = $firstname . $lastname;
 	$mail->Subject = $name." sent you an email";
@@ -39,6 +42,8 @@ if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['emai
 	
 	
 	$mail->Body = $message."<br><br>".$name."<br>".$email."<br>".$phone."<br>";
+
+	ChromePhp::log('Did we make it to the end?');
 
 	//send the message, check for errors
 	if (!$mail->send()) {
