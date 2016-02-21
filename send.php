@@ -9,7 +9,6 @@ if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['emai
 	$email = 		$_POST['email'];
 	$message = 		$_POST['message'];
 	
-	ChromePhp::log("Hello lets start");
 	$mail = new PHPMailer();  // create a new object
 	$mail->IsSMTP(); // enable SMTP
 	$mail->SMTPDebug = 0;  // debugging: 1 = errors and messages, 2 = messages only
@@ -18,38 +17,24 @@ if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['emai
 	$mail->Host = 'smtp.gmail.com';
 	$mail->Port = 465; 
 	$mail->Username = 'laserlotusproductions@gmail.com';  
-	$mail->Password = 'Nachos11!';        
-	ChromePhp::log("In the middle now");   
+	$mail->Password = 'Nachos11!';          
 	$mail->From = $email;
 	$name = $firstname . $lastname;
+	ChromePhp::log("added name: ",$name);
 	$mail->Subject = $name." sent you an email";
+	ChromePhp::log("added subject");
 	$mail->Body = $message."<br><br>".$name."<br>".$email."<br>".$phone."<br>";
+	ChromePhp::log("Added Body");
 	$mail->addAddress("hokienick@gmail.com"); 
+	ChromePhp::log("Added Address and about to send");
+
 	if(!$mail->Send()) {
-		$error = 'Mail error: '.$mail->ErrorInfo; 
+		ChromePhp::log("Mail error: ", $mail->ErrorInfo);
 		return false;
 	} else {
 		$error = 'Message sent!';
 		return true;
 	}
-	
-	$mail->From = $email;
-	$mail->CharSet = "UTF-8";
-	$mail->FromName = $email;
-	$mail->addAddress("hokienick@gmail.com"); 
-	
-	$mail->IsHTML(true);
-	
-	
-	$mail->Body = $message."<br><br>".$name."<br>".$email."<br>".$phone."<br>";
-
 	ChromePhp::log("Did we make it to the end?");
-
-	//send the message, check for errors
-	if (!$mail->send()) {
-	    echo "Mailer Error: " . $mail->ErrorInfo;
-	} else {
-	    echo "Message sent!";
-	}
 }
 ?>  
