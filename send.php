@@ -37,10 +37,10 @@ if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['emai
 	$mail->SMTPAuth = true;
 
 	//Username to use for SMTP authentication - use full email address for gmail
-	$mail->Username = "nicastil@vt.edu";
+	$mail->Username = 'laserlotusproductions@google.com';
 
 	//Password to use for SMTP authentication
-	$mail->Password = "Nachos11!";
+	$mail->Password = 'Nachos11!';
 
 
 	//formulate email
