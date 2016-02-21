@@ -11,7 +11,7 @@ if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['emai
 	
 	$mail = new PHPMailer();  // create a new object
 	$mail->IsSMTP(); // enable SMTP
-	$mail->SMTPDebug = 1;  // debugging: 1 = errors and messages, 2 = messages only
+	$mail->SMTPDebug = 3;  // debugging: 1 = errors and messages, 2 = messages only
 	$mail->SMTPAuth = true;  // authentication enabled
 	$mail->SMTPSecure = 'tls'; //Set the encryption system to use - ssl (deprecated) or tls
 	$mail->Host = 'smtp.gmail.com';
