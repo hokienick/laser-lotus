@@ -13,9 +13,9 @@ if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['emai
 	$mail->IsSMTP(); // enable SMTP
 	$mail->SMTPDebug = 3;  // debugging: 1 = errors and messages, 2 = messages only
 	$mail->SMTPAuth = true;  // authentication enabled
-	$mail->SMTPSecure = 'tls'; //Set the encryption system to use - ssl (deprecated) or tls
+	$mail->SMTPSecure = 'ssl'; //Set the encryption system to use - ssl (deprecated) or tls
 	$mail->Host = 'smtp.gmail.com';
-	$mail->Port = 587; 
+	$mail->Port = 465; 
 	$mail->Username = 'laserlotusproductions@gmail.com';  
 	$mail->Password = 'Nachos11!';          
 	$mail->From = $email;
