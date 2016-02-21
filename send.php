@@ -52,6 +52,12 @@ if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['emai
 	$mail->Subject = $name." sent you an email";
 	
 	$mail->Body = $message."<br><br>".$name."<br>".$email."<br>".$phone."<br>";
-	$mail->send();
+
+	//send the message, check for errors
+	if (!$mail->send()) {
+	    echo "Mailer Error: " . $mail->ErrorInfo;
+	} else {
+	    echo "Message sent!";
+	}
 }
 ?>  
