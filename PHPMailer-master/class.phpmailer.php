@@ -1,4 +1,5 @@
 <?php
+include '../ChromePhp.php';
 /**
  * PHPMailer - PHP email creation and transport class.
  * PHP Version 5
@@ -1173,6 +1174,7 @@ class PHPMailer
      */
     public function send()
     {
+        ChromePhp::log("Enter Send() Function");
         try {
             if (!$this->preSend()) {
                 return false;
@@ -1195,6 +1197,7 @@ class PHPMailer
      */
     public function preSend()
     {
+        ChromePhp::log("Enter PreSend()");
         try {
             $this->error_count = 0; // Reset errors
             $this->mailHeader = '';
