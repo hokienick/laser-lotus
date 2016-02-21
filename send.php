@@ -2,7 +2,7 @@
 <?php
 if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['email']) && isset($_POST['message'])) {
 	require 'PHPMailer-master/class.phpmailer.php'; //you have to download this plugin from github.com - link is in documentation
-	include 'ChromePhp.php'
+	include 'ChromePhp.php';
 	
 	$firstname = 	$_POST['firstname'];
 	$lastname = 	$_POST['lastname'];
