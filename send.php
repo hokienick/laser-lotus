@@ -9,7 +9,7 @@ if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['emai
 	$email = 		$_POST['email'];
 	$message = 		$_POST['message'];
 	
-	ChromePhp::log('Hello lets start');
+	ChromePhp::log("Hello lets start");
 	$mail = new PHPMailer();  // create a new object
 	$mail->IsSMTP(); // enable SMTP
 	$mail->SMTPDebug = 0;  // debugging: 1 = errors and messages, 2 = messages only
@@ -19,7 +19,7 @@ if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['emai
 	$mail->Port = 465; 
 	$mail->Username = 'laserlotusproductions@gmail.com';  
 	$mail->Password = 'Nachos11!';        
-	ChromePhp::log('In the middle now');   
+	ChromePhp::log("In the middle now");   
 	$mail->From = $email;
 	$name = $firstname . $lastname;
 	$mail->Subject = $name." sent you an email";
@@ -43,7 +43,7 @@ if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['emai
 	
 	$mail->Body = $message."<br><br>".$name."<br>".$email."<br>".$phone."<br>";
 
-	ChromePhp::log('Did we make it to the end?');
+	ChromePhp::log("Did we make it to the end?");
 
 	//send the message, check for errors
 	if (!$mail->send()) {
