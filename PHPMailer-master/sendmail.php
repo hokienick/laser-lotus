@@ -24,7 +24,8 @@
     $mail->IsHTML(true);
     $mail->Body    = $message."<br><br>".$name."<br>".$email."<br>".$phone."<br>";
     
-     if($mail->Send())
+     ChromePhp::log('Did I make it this far at least?!');
+     if($mail->send())
      {
         ChromePhp::log('SUCCESS!');
         echo "Message sent!";

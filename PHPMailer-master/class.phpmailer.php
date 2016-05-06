@@ -1,4 +1,5 @@
 <?php
+    include '../ChromePhp.php';
 /**
  * PHPMailer - PHP email creation and transport class.
  * PHP Version 5
@@ -1196,19 +1197,21 @@ class PHPMailer
      */
     public function preSend()
     {
+        ChromePhp::log('presending!');
         try {
             $this->error_count = 0; // Reset errors
             $this->mailHeader = '';
-
+            ChromePhp::log('tag1');
             // Dequeue recipient and Reply-To addresses with IDN
             foreach (array_merge($this->RecipientsQueue, $this->ReplyToQueue) as $params) {
                 $params[1] = $this->punyencodeAddress($params[1]);
                 call_user_func_array(array($this, 'addAnAddress'), $params);
             }
+            ChromePhp::log('tag2');
             if ((count($this->to) + count($this->cc) + count($this->bcc)) < 1) {
                 throw new phpmailerException($this->lang('provide_address'), self::STOP_CRITICAL);
             }
-
+            ChromePhp::log('tag3');
             // Validate From, Sender, and ConfirmReadingTo addresses
             foreach (array('From', 'Sender', 'ConfirmReadingTo') as $address_kind) {
                 $this->$address_kind = trim($this->$address_kind);
@@ -1226,7 +1229,7 @@ class PHPMailer
                     return false;
                 }
             }
-
+            ChromePhp::log('tag4');
             // Set whether the message is multipart/alternative
             if ($this->alternativeExists()) {
                 $this->ContentType = 'multipart/alternative';
