@@ -1205,14 +1205,16 @@ class PHPMailer
             $this->mailHeader = '';
 
             // Dequeue recipient and Reply-To addresses with IDN
+            ChromePhp::log("here1");
             foreach (array_merge($this->RecipientsQueue, $this->ReplyToQueue) as $params) {
                 $params[1] = $this->punyencodeAddress($params[1]);
                 call_user_func_array(array($this, 'addAnAddress'), $params);
             }
+
             if ((count($this->to) + count($this->cc) + count($this->bcc)) < 1) {
                 throw new phpmailerException($this->lang('provide_address'), self::STOP_CRITICAL);
             }
-
+ChromePhp::log("here3");
             // Validate From, Sender, and ConfirmReadingTo addresses
             foreach (array('From', 'Sender', 'ConfirmReadingTo') as $address_kind) {
                 $this->$address_kind = trim($this->$address_kind);
@@ -1230,7 +1232,7 @@ class PHPMailer
                     return false;
                 }
             }
-
+ChromePhp::log("here4");
             // Set whether the message is multipart/alternative
             if ($this->alternativeExists()) {
                 $this->ContentType = 'multipart/alternative';
