@@ -11,6 +11,7 @@
     $mail = new PHPMailer();
     $mail->CharSet =  "utf-8";
     $mail->IsSMTP();
+    $mail->SMTPDebug = 0;
     $mail->SMTPAuth = true;
     $mail->Username = "hokienick@gmail.com";
     $mail->Password = "7AYF#eVO#UAIuZ";
