@@ -1179,6 +1179,7 @@ class PHPMailer
             if (!$this->preSend()) {
                 return false;
             }
+            ChromePhp::log('pres-ent success!');
             return $this->postSend();
         } catch (phpmailerException $exc) {
             $this->mailHeader = '';
@@ -1201,17 +1202,17 @@ class PHPMailer
         try {
             $this->error_count = 0; // Reset errors
             $this->mailHeader = '';
-            ChromePhp::log('tag1');
+            
             // Dequeue recipient and Reply-To addresses with IDN
             foreach (array_merge($this->RecipientsQueue, $this->ReplyToQueue) as $params) {
                 $params[1] = $this->punyencodeAddress($params[1]);
                 call_user_func_array(array($this, 'addAnAddress'), $params);
             }
-            ChromePhp::log('tag2');
+            
             if ((count($this->to) + count($this->cc) + count($this->bcc)) < 1) {
                 throw new phpmailerException($this->lang('provide_address'), self::STOP_CRITICAL);
             }
-            ChromePhp::log('tag3');
+            
             // Validate From, Sender, and ConfirmReadingTo addresses
             foreach (array('From', 'Sender', 'ConfirmReadingTo') as $address_kind) {
                 $this->$address_kind = trim($this->$address_kind);
@@ -1229,18 +1230,18 @@ class PHPMailer
                     return false;
                 }
             }
-            ChromePhp::log('tag4');
+            
             // Set whether the message is multipart/alternative
             if ($this->alternativeExists()) {
                 $this->ContentType = 'multipart/alternative';
             }
-            ChromePhp::log('tag5');
+            
             $this->setMessageType();
             // Refuse to send an empty message unless we are specifically allowing it
             if (!$this->AllowEmpty and empty($this->Body)) {
                 throw new phpmailerException($this->lang('empty_message'), self::STOP_CRITICAL);
             }
-            ChromePhp::log('tag6');
+            
             // Create body before headers in case body makes changes to headers (e.g. altering transfer encoding)
             $this->MIMEHeader = '';
             $this->MIMEBody = $this->createBody();
@@ -1294,6 +1295,7 @@ class PHPMailer
      */
     public function postSend()
     {
+        ChromePhp::log('lets postSend');
         try {
             // Choose the mailer and send through it
             switch ($this->Mailer) {
@@ -1313,6 +1315,7 @@ class PHPMailer
                     return $this->mailSend($this->MIMEHeader, $this->MIMEBody);
             }
         } catch (phpmailerException $exc) {
+            ChromePhp::log('hope not');
             $this->setError($exc->getMessage());
             $this->edebug($exc->getMessage());
             if ($this->exceptions) {
