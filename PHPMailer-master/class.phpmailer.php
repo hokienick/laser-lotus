@@ -1179,7 +1179,6 @@ class PHPMailer
             if (!$this->preSend()) {
                 return false;
             }
-            ChromePhp::log('pres-ent success!');
             return $this->postSend();
         } catch (phpmailerException $exc) {
             $this->mailHeader = '';
@@ -1198,7 +1197,6 @@ class PHPMailer
      */
     public function preSend()
     {
-        ChromePhp::log('presending!');
         try {
             $this->error_count = 0; // Reset errors
             $this->mailHeader = '';
