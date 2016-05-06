@@ -1,6 +1,7 @@
 <?php 
 
  require_once('class.phpmailer.php');
+ require 'PHPMailerAutoload.php';
  include 'ChromePhp.php';
     
     $firstname =   $_POST['firstname'];

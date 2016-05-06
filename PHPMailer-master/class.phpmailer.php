@@ -1538,7 +1538,7 @@ ChromePhp::log("step5");
             $this->smtp = $this->getSMTPInstance();
         }
 ChromePhp::log("con1");
-ChromePhp::log($this->smtp->connected());
+
         // Already connected?
         if ($this->smtp->connected()) {
             return true;
