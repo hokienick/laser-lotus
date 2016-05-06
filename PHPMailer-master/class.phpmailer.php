@@ -1313,7 +1313,7 @@ class PHPMailer
                     return $this->mailSend($this->MIMEHeader, $this->MIMEBody);
             }
         } catch (phpmailerException $exc) {
-            ChromePhp::log('hope not');
+            ChromePhp::log($exc->getMessage() + ' and ' + $exc->getMessage());
             $this->setError($exc->getMessage());
             $this->edebug($exc->getMessage());
             if ($this->exceptions) {
