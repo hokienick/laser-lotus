@@ -1,7 +1,12 @@
 <?php 
 
  require_once('class.phpmailer.php');
- 
+    
+    $firstname =   $_POST['firstname'];
+    $lastname =    $_POST['lastname'];
+    $email =       $_POST['email'];
+    $message =     $_POST['message'];
+
     $mail = new PHPMailer();
     $mail->CharSet =  "utf-8";
     $mail->IsSMTP();
@@ -14,21 +19,17 @@
  
     $mail->setFrom('hokienick@gmail.com', 'Nick Castillo');
  
-    $mail->Subject  =  'Mail from your website';
+    $mail->Subject  =  'CONTACT via Personal Website';
     $mail->IsHTML(true);
-    $mail->Body    = 'Hi there ,
-                        <br />
-                        this mail was sent using PHPMailer...
-                        <br />
-                        cheers... :)';
+    $mail->Body    = $message."<br><br>".$name."<br>".$email."<br>".$phone."<br>";
   
      if($mail->Send())
      {
-        echo "Message was Successfully Sent :)";
+        echo "Message sent!";
      }
      else
      {
-        echo "Mail Error - >".$mail->ErrorInfo;
+        echo "Mailer Error: " . $mail->ErrorInfo;
      }
   
 ?>
