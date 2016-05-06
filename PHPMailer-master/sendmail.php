@@ -10,7 +10,7 @@
 
     $mail = new PHPMailer();
     $mail->CharSet =  "utf-8";
-    //$mail->IsSMTP();
+    $mail->IsSMTP();
     $mail->SMTPAuth = true;
     $mail->Username = "hokienick@gmail.com";
     $mail->Password = "7AYF#eVO#UAIuZ";
@@ -18,14 +18,13 @@
     $mail->Host = "smtp.gmail.com";
     $mail->Port = "465";
  
-    $mail->setFrom('hokienick@gmail.com', 'Nick Castillo');
+    $mail->setFrom('hokienick@gmail.com', 'Nick Castillo', 0);
     $mail->addAddress("hokienick@gmail.com");
  
     $mail->Subject  =  'CONTACT via Personal Website';
     $mail->IsHTML(true);
     $mail->Body    = $message."<br><br>".$name."<br>".$email."<br>".$phone."<br>";
     
-     ChromePhp::log('Did I make it this far at least?!');
      if($mail->send())
      {
         ChromePhp::log('SUCCESS!');
@@ -33,7 +32,7 @@
      }
      else
      {
-        ChromePhp::log('Failure');
+        ChromePhp::log($mail->ErrorInfo);
         echo "Mailer Error: " . $mail->ErrorInfo;
      }
   

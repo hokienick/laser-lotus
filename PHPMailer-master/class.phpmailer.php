@@ -1296,6 +1296,7 @@ class PHPMailer
         ChromePhp::log('lets postSend');
         try {
             // Choose the mailer and send through it
+            ChromePhp::log($this->Mailer);
             switch ($this->Mailer) {
                 case 'sendmail':
                 case 'qmail':
