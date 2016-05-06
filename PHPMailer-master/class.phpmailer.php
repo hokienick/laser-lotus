@@ -1465,20 +1465,23 @@ class PHPMailer
      */
     protected function smtpSend($header, $body)
     {
+        ChromePhp::log("step1");
         $bad_rcpt = array();
         if (!$this->smtpConnect($this->SMTPOptions)) {
             throw new phpmailerException($this->lang('smtp_connect_failed'), self::STOP_CRITICAL);
         }
+        ChromePhp::log("step2");
         if ('' == $this->Sender) {
             $smtp_from = $this->From;
         } else {
             $smtp_from = $this->Sender;
         }
+        ChromePhp::log("step3");
         if (!$this->smtp->mail($smtp_from)) {
             $this->setError($this->lang('from_failed') . $smtp_from . ' : ' . implode(',', $this->smtp->getError()));
             throw new phpmailerException($this->ErrorInfo, self::STOP_CRITICAL);
         }
-
+ChromePhp::log("step4");
         // Attempt to send to all recipients
         foreach (array($this->to, $this->cc, $this->bcc) as $togroup) {
             foreach ($togroup as $to) {
@@ -1492,17 +1495,19 @@ class PHPMailer
                 $this->doCallback($isSent, array($to[0]), array(), array(), $this->Subject, $body, $this->From);
             }
         }
-
+ChromePhp::log("step5");
         // Only send the DATA command if we have viable recipients
         if ((count($this->all_recipients) > count($bad_rcpt)) and !$this->smtp->data($header . $body)) {
             throw new phpmailerException($this->lang('data_not_accepted'), self::STOP_CRITICAL);
         }
+        ChromePhp::log("step6");
         if ($this->SMTPKeepAlive) {
             $this->smtp->reset();
         } else {
             $this->smtp->quit();
             $this->smtp->close();
         }
+        ChromePhp::log("step7");
         //Create error message for any bad addresses
         if (count($bad_rcpt) > 0) {
             $errstr = '';
