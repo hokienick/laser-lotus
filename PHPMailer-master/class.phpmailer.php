@@ -1234,13 +1234,13 @@ class PHPMailer
             if ($this->alternativeExists()) {
                 $this->ContentType = 'multipart/alternative';
             }
-
+            ChromePhp::log('tag5');
             $this->setMessageType();
             // Refuse to send an empty message unless we are specifically allowing it
             if (!$this->AllowEmpty and empty($this->Body)) {
                 throw new phpmailerException($this->lang('empty_message'), self::STOP_CRITICAL);
             }
-
+            ChromePhp::log('tag6');
             // Create body before headers in case body makes changes to headers (e.g. altering transfer encoding)
             $this->MIMEHeader = '';
             $this->MIMEBody = $this->createBody();

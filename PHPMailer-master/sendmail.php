@@ -19,6 +19,7 @@
     $mail->Port = "465";
  
     $mail->setFrom('hokienick@gmail.com', 'Nick Castillo');
+    $mail->addAddress("hokienick@gmail.com");
  
     $mail->Subject  =  'CONTACT via Personal Website';
     $mail->IsHTML(true);
