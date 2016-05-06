@@ -1,6 +1,7 @@
 <?php 
 
  require_once('class.phpmailer.php');
+ include 'ChromePhp.php';
     
     $firstname =   $_POST['firstname'];
     $lastname =    $_POST['lastname'];
@@ -22,13 +23,15 @@
     $mail->Subject  =  'CONTACT via Personal Website';
     $mail->IsHTML(true);
     $mail->Body    = $message."<br><br>".$name."<br>".$email."<br>".$phone."<br>";
-  
+    
      if($mail->Send())
      {
+        ChromePhp::log('SUCCESS!');
         echo "Message sent!";
      }
      else
      {
+        ChromePhp::log('Failure');
         echo "Mailer Error: " . $mail->ErrorInfo;
      }
   
