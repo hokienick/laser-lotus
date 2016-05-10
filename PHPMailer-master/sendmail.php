@@ -25,7 +25,7 @@
  
     $mail->Subject  =  'CONTACT via Personal Website';
     $mail->IsHTML(true);
-    $mail->Body    = $message."<br><br>".$name."<br>".$email."<br>".$phone."<br>";
+    $mail->Body    = $message."<br><br>"."Name: ".$firstname." ".$lastname."<br>".$email."<br>".$phone."<br>";
     
      if($mail->send())
      {
