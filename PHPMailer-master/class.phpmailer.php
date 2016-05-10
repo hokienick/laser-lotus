@@ -1297,7 +1297,6 @@ class PHPMailer
     {
         try {
             // Choose the mailer and send through it
-
             switch ($this->Mailer) {
                 case 'sendmail':
                 case 'qmail':
