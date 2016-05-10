@@ -1293,10 +1293,8 @@ class PHPMailer
      */
     public function postSend()
     {
-        ChromePhp::log('lets postSend');
         try {
             // Choose the mailer and send through it
-            ChromePhp::log($this->Mailer);
             switch ($this->Mailer) {
                 case 'sendmail':
                 case 'qmail':
@@ -1537,20 +1535,19 @@ ChromePhp::log("step5");
         if (is_null($this->smtp)) {
             $this->smtp = $this->getSMTPInstance();
         }
-ChromePhp::log("con1");
 
         // Already connected?
         if ($this->smtp->connected()) {
             return true;
         }
-ChromePhp::log("con2");
+
         $this->smtp->setTimeout($this->Timeout);
         $this->smtp->setDebugLevel($this->SMTPDebug);
         $this->smtp->setDebugOutput($this->Debugoutput);
         $this->smtp->setVerp($this->do_verp);
         $hosts = explode(';', $this->Host);
         $lastexception = null;
-ChromePhp::log("con3");
+
         foreach ($hosts as $hostentry) {
             $hostinfo = array();
             if (!preg_match('/^((ssl|tls):\/\/)*([a-zA-Z0-9\.-]*):?([0-9]*)$/', trim($hostentry), $hostinfo)) {
@@ -1632,7 +1629,6 @@ ChromePhp::log("con3");
                 }
             }
         }
-        ChromePhp::log("con4");
         // If we get here, all connection attempts have failed, so close connection hard
         $this->smtp->close();
         // As we've caught all exceptions, just report whatever the last one was
