@@ -1176,9 +1176,12 @@ class PHPMailer
     public function send()
     {
         try {
+            ChromePhp::log("what is going on.");
             if (!$this->preSend()) {
+                ChromePhp::log("returned false?");
                 return false;
             }
+            ChromePhp::log("Posting");
             return $this->postSend();
         } catch (phpmailerException $exc) {
             $this->mailHeader = '';
@@ -1228,18 +1231,17 @@ class PHPMailer
                     return false;
                 }
             }
-            
             // Set whether the message is multipart/alternative
             if ($this->alternativeExists()) {
                 $this->ContentType = 'multipart/alternative';
             }
-            
+
             $this->setMessageType();
             // Refuse to send an empty message unless we are specifically allowing it
             if (!$this->AllowEmpty and empty($this->Body)) {
                 throw new phpmailerException($this->lang('empty_message'), self::STOP_CRITICAL);
             }
-            
+
             // Create body before headers in case body makes changes to headers (e.g. altering transfer encoding)
             $this->MIMEHeader = '';
             $this->MIMEBody = $this->createBody();
@@ -1250,6 +1252,7 @@ class PHPMailer
 
             // To capture the complete message when using mail(), create
             // an extra header list which createHeader() doesn't fold in
+
             if ($this->Mailer == 'mail') {
                 if (count($this->to) > 0) {
                     $this->mailHeader .= $this->addrAppend('To', $this->to);
@@ -1277,6 +1280,7 @@ class PHPMailer
             }
             return true;
         } catch (phpmailerException $exc) {
+            ChromePhp::log($exc->getMessage());
             $this->setError($exc->getMessage());
             if ($this->exceptions) {
                 throw $exc;
@@ -1295,6 +1299,7 @@ class PHPMailer
     {
         try {
             // Choose the mailer and send through it
+            ChromePhp::log($this->Mailer);
             switch ($this->Mailer) {
                 case 'sendmail':
                 case 'qmail':
@@ -1463,9 +1468,10 @@ class PHPMailer
      */
     protected function smtpSend($header, $body)
     {
-        ChromePhp::log("step1");
         $bad_rcpt = array();
+        ChromePhp::log("options are " + $this->SMTPOptions);
         if (!$this->smtpConnect($this->SMTPOptions)) {
+            ChromePhp::log("throw error?");
             throw new phpmailerException($this->lang('smtp_connect_failed'), self::STOP_CRITICAL);
         }
         ChromePhp::log("step2");
