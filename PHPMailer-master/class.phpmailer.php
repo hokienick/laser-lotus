@@ -1176,9 +1176,7 @@ class PHPMailer
     public function send()
     {
         try {
-            ChromePhp::log("what is going on.");
             if (!$this->preSend()) {
-                ChromePhp::log("returned false?");
                 return false;
             }
             ChromePhp::log("Posting");

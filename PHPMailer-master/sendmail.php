@@ -17,7 +17,7 @@
     // 0 = off (for production use)
     // 1 = client messages
     // 2 = client and server messages
-    $mail->SMTPDebug = 0;
+    $mail->SMTPDebug = 4;
 
     //Ask for HTML-friendly debug output
     $mail->Debugoutput = 'html';
@@ -26,10 +26,10 @@
     $mail->Host = 'smtp.gmail.com';
 
     //Set the SMTP port number - 587 for authenticated TLS, a.k.a. RFC4409 SMTP submission
-    $mail->Port = 465;
+    $mail->Port = 587;
 
     //Set the encryption system to use - ssl (deprecated) or tls
-    $mail->SMTPSecure = 'ssl';
+    $mail->SMTPSecure = 'tls';
 
     //Whether to use SMTP authentication
     $mail->SMTPAuth = true;
@@ -62,14 +62,15 @@
     $mail->Subject = 'A message from your website';
 
     //Replace the plain text body with one created manually
-    $mail->AltBody = $message."<br><br>"."Name: ".$firstname." ".$lastname."<br>".$email."<br>".$phone."<br>";
+    $mail->Body = $message."<br><br>"."Name: ".$firstname." ".$lastname."<br>".$email."<br>".$phone."<br>";
 
     //send the message, check for errors
+    ChromePhp::log("begin to send");
     if (!$mail->send()) {
-        ChromePhp::log($mail->ErrorInfo)
+        ChromePhp::log($mail->ErrorInfo);
         echo "Mailer Error: " . $mail->ErrorInfo;
     } else {
-        ChromePhp::log("WE WIN!")
+        ChromePhp::log("WE WIN!");
         echo "Message sent!";
     }
       
