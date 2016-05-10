@@ -34,7 +34,7 @@
      }
      else
      {
-        ChromePhp::log($mail->ErrorInfo);
+        ChromePhp::log($mail->errorMessage());
         echo "Mailer Error: " . $mail->ErrorInfo;
      }
   
