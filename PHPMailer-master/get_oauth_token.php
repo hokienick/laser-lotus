@@ -26,7 +26,7 @@ session_start();
 
 //If this automatic URL doesn't work, set it yourself manually
 // $redirectUri = isset($_SERVER['HTTPS']) ? 'https://' : 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
-// $redirectUri = 'http://localhost/laserlotus/PHPMailer-master/get_oauth_token.php';
+$redirectUri = 'http://localhost/laserlotus/PHPMailer-master/get_oauth_token.php';
 
 //These details obtained are by setting up app in Google developer console.
 $clientId = '583615294289-60dmi7fcohurkq40af7ej50o49s7p08d.apps.googleusercontent.com';
@@ -68,12 +68,12 @@ class Google extends AbstractProvider
 
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
-    return ' ';
+	return ' ';
     }
 
     protected function getAuthorizationParameters(array $options)
     {
-    if (is_array($this->scope)) {
+	if (is_array($this->scope)) {
             $separator = $this->getScopeSeparator();
             $this->scope = implode($separator, $this->scope);
         }
@@ -83,7 +83,7 @@ class Google extends AbstractProvider
             array_filter([
                 'hd'          => $this->hostedDomain,
                 'access_type' => $this->accessType,
-        'scope'       => $this->scope,
+		'scope'       => $this->scope,
                 // if the user is logged in with more than one account ask which one to use for the login!
                 'authuser'    => '-1'
             ])
@@ -134,7 +134,7 @@ $provider = new Google(
         'clientSecret' => $clientSecret,
         'redirectUri' => $redirectUri,
         'scope' => array('https://mail.google.com/'),
-    'accessType' => 'offline'
+	'accessType' => 'offline'
     )
 );
 
