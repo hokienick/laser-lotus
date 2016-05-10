@@ -26,7 +26,7 @@ session_start();
 
 //If this automatic URL doesn't work, set it yourself manually
 // $redirectUri = isset($_SERVER['HTTPS']) ? 'https://' : 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
-$redirectUri = 'http://localhost/laserlotus/PHPMailer-master/get_oauth_token.php';
+// $redirectUri = 'http://localhost/laserlotus/PHPMailer-master/get_oauth_token.php';
 
 //These details obtained are by setting up app in Google developer console.
 $clientId = '583615294289-60dmi7fcohurkq40af7ej50o49s7p08d.apps.googleusercontent.com';

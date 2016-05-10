@@ -66,8 +66,10 @@
 
     //send the message, check for errors
     if (!$mail->send()) {
+        ChromePhp::log($mail->ErrorInfo)
         echo "Mailer Error: " . $mail->ErrorInfo;
     } else {
+        ChromePhp::log("WE WIN!");
         echo "Message sent!";
     }
       
