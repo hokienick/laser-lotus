@@ -69,6 +69,8 @@
     //Set AuthType
     $mail->AuthType = 'XOAUTH2';
 
+    $mail->SMTPAutoTLS = false;
+
     //User Email to use for SMTP authentication - Use the same Email used in Google Developer Console
     $mail->oauthUserEmail = "hokienick@gmail.com";
 
