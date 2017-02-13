@@ -15,7 +15,7 @@
     $mail->SMTPDebug = 2;
     $mail->SMTPAuth = true;
     $mail->Username = "hokienick@gmail.com";
-    $mail->Password = "password"; // TODO: Change this with your password
+    $mail->Password = getenv('MAIL_PASS');
     $mail->SMTPSecure = "ssl";
     $mail->Host = "smtp.gmail.com";
     $mail->Port = "465";
